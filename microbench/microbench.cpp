@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
 		CUDA_CHECK( cuDeviceGetAttribute (&major, CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MAJOR, hDevice) );
 		CUDA_CHECK( cuDeviceGetAttribute (&minor, CU_DEVICE_ATTRIBUTE_COMPUTE_CAPABILITY_MINOR, hDevice) );
 		CUDA_CHECK( cuDeviceGetName(deviceName, sizeof(deviceName), hDevice) );
-		if (major >= 5 && minor >= 2)
+		if (major >= 5) // && minor >= 2)
 		{
 			printf("Using: Id:%d %s (%d.%d)\n\n", ordinal, deviceName, major, minor);
 			break;
@@ -174,7 +174,7 @@ int main(int argc, char* argv[])
 	// When using just one block, print out the internal timing data
 	if (internalTiming)
 	{
-		int count = 0, total = 0, min = 999999, max = 0;
+		long count = 0, total = 0, min = 999999, max = 0;
 
 		int* clocks_p  = clocks;
 		int* dataOut_p = dataOut;
@@ -198,7 +198,7 @@ int main(int argc, char* argv[])
 			clocks_p  += threads;
 			dataOut_p += threads;
 		}
-		printf("average: %.3f, min %d, max: %d\n", (float)total/count, min, max);
+		printf("average: %.3f, min %ld, max: %ld\n", (float)total/count, min, max);
 	}
 	else
 	{

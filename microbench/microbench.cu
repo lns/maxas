@@ -34,7 +34,8 @@ extern "C" __global__ void  microbench(int *out, int *clocks, int *in)
 
     int end = clock();
 
-    clocks[tid] = (start >> 16) | (end & 0xffff0000); //end - start;
+    //clocks[tid] = (start >> 16) | (end & 0xffff0000); //end - start;
+		clocks[tid] = end - start;
 
     out[tid] = share[tid ^ 1];
 }
